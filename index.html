@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+ 
+  <head>
+    <!-- Required meta tags -->
+   
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
+    <title>Restaurante Bom Apetite</title>
+  </head>
+  <body>
+    <h1>Restaurante Bom Apetite</h1>
+<a href="pagina2.html">entrar </a>
+
+  <div class="container">
+    <div class="row justify-content-evenly">
+       <div class="col align-self-end">
+      <br>
+    </div>
+      <div class="col align-self-end">
+      <input type="text" id="termo" onkeyup="search()">
+    </div>
+      
+    </div>
+    <div class="row">
+      
+    </div>
+  </div>
+  <hr>
+  
+    <!-- <button onkeyup="search()">Buscar</button> -->
+    <div id="resultado">
+
+    </div>
+     <script src="script.js"></script>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+  
+   <
+
+</html>
+
+ <style>
+body {background-color: red;}
+h1   {color:yellow;}
+p    {color: purple;}
+</style>
+</head>
+<body>
+
+</html>
+
+ 
+  <html>
+<head>
+    <style>
+        div {
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+  border: 1px solid #777;
+  width: 800px;
+  margin: auto;
+}
+.prodtd {
+  width: 700px;
+  height: 80px;
+}
+.nomeprod {
+  background-color: #ffa;
+}
+.preco {
+  background-color: #eee;
+}
+  
+    </style>
+   <script type="text/javascript">
+        total = 0.00;
+
+function adiciona(id) {
+  calcula(id, "adicao");
+}
+
+function remove(id) {
+  (calcula(id, "subtracao"));
+}
+
+function calcula(id, operacao) {
+  nomeid = "nome" + id;
+  precoid = "preco" + id;
+  qtdid = "qtd" + id;
+
+  nome = document.getElementById(nomeid).innerHTML;
+
+  preco = document.getElementById(precoid).innerHTML;
+  preco = textoParaFloat(preco);
+
+  qtd = document.getElementById(qtdid).innerHTML;
+  qtd = parseInt(qtd);
+
+  //Debug
+  //alert("Produto: " + nome + "\n Preço: " + preco);    
+
+  if (operacao == "adicao") {
+    total = total + preco;
+    qtd = qtd + 1;
+    var s = document.getElementById("exibe").innerHTML;
+    // verificando se ele nao existe na exibiçao
+    if (s.indexOf(nome) == -1) {
+      //mostra a mensagem
+      document.getElementById("exibe").innerHTML += nome + "(<a class='"+nome+"'>" + qtd + "</a>)<br>";
+    } else {
+      document.getElementsByClassName(nome)[0].innerHTML=qtd;
+    }
+  } else {
+
+    
+    var s = document.getElementById("exibe").innerHTML;
+    // verificando se ele nao existe na exibiçao
+    if (s.indexOf(nome) == -1) {
+      //mostra a mensagem
+      s += nome + "(<a class='"+nome+"'>" + qtd-1 + "</a>)<br>";
+    } else {
+      if(qtd>1){     
+      document.getElementsByClassName(nome)[0].innerHTML=qtd-1;
+        }
+      else{
+      
+    document.getElementById("exibe").innerHTML=s.replace(nome + "(<a class=\""+nome+"\">" + qtd + "</a>)<br>"," ");
+      
+      }}
+    total = total - preco;
+    qtd = qtd - 1;
+    
+    
+  }
+  
+
+  document.getElementById(qtdid).innerHTML = qtd;
+
+  document.getElementById("total").innerHTML = floatParaTexto(total);
+}
+
+
+// Converte   [valor texto com vírgula para  centavos]    para    [float]
+
+function textoParaFloat(texto) {
+  // Retira pontos que separam milhar se existirem. Ex: 1.000,25 vira 1000,25
+  texto = texto.replace(".", "");
+
+  // Substitui vírgula separando a casa decimal por ponto ex: 1000,25 vira 1000.25
+  texto = texto.replace(",", "."); // isso é necessário para converter para float corretamente
+
+  // Converte de texto para número real
+  numero = parseFloat(texto);
+
+  return numero; // Retorna um número float para ser usado para fazer cálculos    
+}
+
+
+
+// Converte   [valor float com ponto para casa decimal]  para  [texto com vírgula para separar centavos]
+
+function floatParaTexto(numero) {
+  numero = numero.toFixed(2); // Duas casas decimais
+
+  texto = numero.toString();
+  texto = texto.replace(".", ","); // substitui a vírgula por ponto 
+
+  return texto;
+}
+
+
+
+// Apenas prevenção para pessoas que digitam ponto de milhar por costume
+function removePonto(x) {
+  x.value = x.value.replace('.', '');
+}
+   
+    </script>
+    </head>
+<body>
+    <table>
+
+  <!-- Bloco gerado por PHP -->
+  <tr>
+    <td class="prodtd">
+
+      <div id="nome1" class="nomeprod">Penne</div>
+
+      <div id="preco1" class="preco">R$22,00</div>
+
+    </td>
+    <td align="center" valign="middle">
+
+      <input type="button" value="-" onclick="remove(1)">
+
+      <span id="qtd1">0</span> 
+
+      <input type="button" value="+" onclick="adiciona(1)">
+
+    </td>
+  </tr>
+  <!-- Fim Bloco gerado por PHP -->
+
+
+
+  <!-- Bloco gerado por PHP -->
+  <tr>
+    <td class="prodtd">
+
+      <div id="nome2" class="nomeprod">Burguer com batata frita</div>
+
+      <div id="preco2" class="preco">R$18,00</div>
+
+    </td>
+    <td align="center" valign="middle">
+
+      <input type="button" value="-" onclick="remove(2)">
+
+      <span id="qtd2">0</span> 
+
+      <input type="button" value="+" onclick="adiciona(2)">
+
+    </td>
+  </tr>
+  <!-- Fim Bloco gerado por PHP -->
+ 
+ 
+ 
+ <!-- Bloco gerado por PHP -->
+  <tr>
+    <td class="prodtd">
+
+      <div id="nome3" class="nomeprod">Sucos</div>
+
+      <div id="preco3" class="preco">R$6,90</div>
+
+    </td>
+    <td align="center" valign="middle">
+
+      <input type="button" value="-" onclick="remove(3)">
+
+      <span id="qtd3">0</span> 
+
+      <input type="button" value="+" onclick="adiciona(3)">
+
+    </td>
+  </tr>
+  <!-- Fim Bloco gerado por PHP -->
+
+
+
+  <!-- Bloco gerado por PHP -->
+  <tr>
+    <td class="prodtd">
+
+      <div id="nome4" class="nomeprod">Bolo</div>
+
+      <div id="preco4" class="preco">R$25,00</div>
+
+    </td>
+    <td align="center" valign="middle">
+
+      <input type="button" value="-" onclick="remove(4)">
+
+      <span id="qtd4">0</span> 
+
+      <input type="button" value="+" onclick="adiciona(4)">
+
+    </td>
+  </tr>
+  <!-- Fim Bloco gerado por PHP -->
+ 
+ 
+ 
+ <!-- Bloco gerado por PHP -->
+  <tr>
+    <td class="prodtd">
+
+      <div id="nome5" class="nomeprod">Hot dog</div>
+
+      <div id="preco5" class="preco">R$7,00</div>
+
+    </td>
+    <td align="center" valign="middle">
+
+      <input type="button" value="-" onclick="remove(5)">
+
+      <span id="qtd5">0</span> 
+
+      <input type="button" value="+" onclick="adiciona(5)">
+
+    </td>
+  </tr>
+  <!-- Fim Bloco gerado por PHP -->
+
+
+
+  <!-- Bloco gerado por PHP -->
+  <tr>
+    <td class="prodtd">
+
+      <div id="nome6" class="nomeprod">Pizza</div>
+
+      <div id="preco6" class="preco">R$15,00</div>
+
+    </td>
+    <td align="center" valign="middle">
+
+      <input type="button" value="-" onclick="remove(6)">
+
+      <span id="qtd6">0</span> 
+
+      <input type="button" value="+" onclick="adiciona(6)">
+
+    </td>
+  </tr>
+  <!-- Fim Bloco gerado por PHP -->
+
+  <tr>
+    <td align="center"><b>Total: <span id="total">0,00<span></b>
+    </td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td align="center" id="exibe"></td>
+
+  </tr>
+
+</table>
+
+ <script>
+            function verifica_e_envia()
+            {
+                array_dados = new Array();
+            
+                colecao = document.getElementsByTagName("tr");
+                
+                qtd_blocos = colecao.length - 1; // O último tr da tabela  é onde fica o total e está sendo descontado
+                // É necessário saber a quantidade de blocos para poder usar em um loop catando os valores
+                
+                // Percorre os blocos catando nomes, quantidades e valores dos produtos com quantidade maior que zero
+                for(i=1; i<=qtd_blocos ;i++)
+                {
+                    qtdid = "qtd"+i;
+                    qtd   = document.getElementById(qtdid).innerHTML;
+                    qtd   = parseInt(qtd);
+                    
+                    if(qtd>0)
+                    {
+                        obj_tmp = {};
+                        
+                        nomeid = "nome"+i;
+                        nome   = document.getElementById(nomeid).innerHTML;
+                        
+                        precoid = "preco"+i;
+                        preco   = document.getElementById(precoid).innerHTML;
+                        preco   = textoParaFloat(preco);
+
+                        obj_tmp.nome  = nome;
+                        obj_tmp.preco = preco;
+                        obj_tmp.qtd   = qtd;
+                        obj_tmp.subtotal = qtd*preco;
+                        
+                        // adiciona elemento no array de dados que será enviado
+                        array_dados.push(obj_tmp);
+                    }
+                }
+                
+                // põe o array_dados no input hidden json_dados
+                document.getElementById("json_dados").value = JSON.stringify(array_dados);
+                
+                // envia o formulário form_pedido_produtos
+                document.getElementById("form_pedido_produtos").submit();
+
+            }
+      </script>        
+        
+        <form action="pedido_produtos.php" method="post" id="form_pedido_produtos" >
+            <input type="hidden" name="json_dados" id="json_dados">        
+            <input type="button" value="Verifica e envia valores" onclick="verifica_e_envia()">
+        </form>
+   </script>
+</body>
+</html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    
+    <p id="teste">Cadastro de Clientes</p>
+
+    <label for="cep">Digite cep</label>
+    <input type="number" id="cep" 
+    placeholder="99999999" >
+    <br><br>
+
+    <button id="buscar">Buscar</button>
+    <hr>
+
+    <form>
+    <label id="labelLogradouro" for="logradouro" hidden>Logradouro</label>
+    <input type="text" id="logradouro" hidden>
+    <br><br>
+    
+    <label id="labelBairro" for="bairro" hidden>Bairro</label>
+    <input type="text" id="bairro" hidden >
+    <br><br>
+
+    <label id="labelLocalidade" for="localidade" hidden>Localidade</label>
+    <input type="text" id="localidade" hidden>
+    <br><br>
+
+    <label  id="labelUF" for="uf" hidden >UF</label>
+    <input type="text" id="uf" hidden >
+    <br><br>
+
+   <button id="salvar" hidden>Salvar</button>
+  </form>
+
+
+    <script src="script.js"></script>
+
+  </body>
+</html>
+
